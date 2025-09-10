@@ -135,6 +135,7 @@ vcpkg_installed/
 
 # Claude Code specific
 .claude/
+CLAUDE.md
 
 # Personal notes that shouldn't be shared
 personal_notes.txt

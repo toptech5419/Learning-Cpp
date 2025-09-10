@@ -1,6 +1,10 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include <cmath>
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 using namespace std;
 
@@ -50,6 +54,81 @@ public:
     }
 };
 
+class TrigCalculator {
+private:
+    bool useDegrees;
+    
+    double degreesToRadians(double degrees) {
+        return degrees * M_PI / 180.0;
+    }
+    
+    double radiansToDegrees(double radians) {
+        return radians * 180.0 / M_PI;
+    }
+    
+public:
+    TrigCalculator() {
+        useDegrees = true;
+    }
+    
+    void setAngleMode(bool degrees) {
+        useDegrees = degrees;
+        cout << "Angle mode set to: " << (degrees ? "Degrees" : "Radians") << endl;
+    }
+    
+    bool getAngleMode() {
+        return useDegrees;
+    }
+    
+    double sine(double angle) {
+        if (useDegrees) {
+            angle = degreesToRadians(angle);
+        }
+        return sin(angle);
+    }
+    
+    double cosine(double angle) {
+        if (useDegrees) {
+            angle = degreesToRadians(angle);
+        }
+        return cos(angle);
+    }
+    
+    double tangent(double angle) {
+        if (useDegrees) {
+            angle = degreesToRadians(angle);
+        }
+        return tan(angle);
+    }
+    
+    double arcsine(double value) {
+        if (value < -1 || value > 1) {
+            cout << "Error: Domain error for arcsin! Input must be between -1 and 1." << endl;
+            return 0;
+        }
+        double result = asin(value);
+        return useDegrees ? radiansToDegrees(result) : result;
+    }
+    
+    double arccosine(double value) {
+        if (value < -1 || value > 1) {
+            cout << "Error: Domain error for arccos! Input must be between -1 and 1." << endl;
+            return 0;
+        }
+        double result = acos(value);
+        return useDegrees ? radiansToDegrees(result) : result;
+    }
+    
+    double arctangent(double value) {
+        double result = atan(value);
+        return useDegrees ? radiansToDegrees(result) : result;
+    }
+    
+    void displayAngleMode() {
+        cout << "Current angle mode: " << (useDegrees ? "Degrees" : "Radians") << endl;
+    }
+};
+
 double add(double a, double b) {
     return a + b;
 }
@@ -78,12 +157,26 @@ void clearInput() {
 void showMenu() {
     cout << "\n=== Calculator Menu ===" << endl;
     cout << "1. Basic calculation (+, -, *, /)" << endl;
-    cout << "2. Store result in memory (MS)" << endl;
-    cout << "3. Recall from memory (MR)" << endl;
-    cout << "4. Clear memory (MC)" << endl;
-    cout << "5. Show memory status" << endl;
-    cout << "6. Exit" << endl;
+    cout << "2. Trigonometric functions" << endl;
+    cout << "3. Store result in memory (MS)" << endl;
+    cout << "4. Recall from memory (MR)" << endl;
+    cout << "5. Clear memory (MC)" << endl;
+    cout << "6. Show memory status" << endl;
+    cout << "7. Toggle angle mode (Degrees/Radians)" << endl;
+    cout << "8. Exit" << endl;
     cout << "Choose an option: ";
+}
+
+void showTrigMenu() {
+    cout << "\n=== Trigonometric Functions ===" << endl;
+    cout << "1. Sine (sin)" << endl;
+    cout << "2. Cosine (cos)" << endl;
+    cout << "3. Tangent (tan)" << endl;
+    cout << "4. Arcsine (asin)" << endl;
+    cout << "5. Arccosine (acos)" << endl;
+    cout << "6. Arctangent (atan)" << endl;
+    cout << "7. Back to main menu" << endl;
+    cout << "Choose a function: ";
 }
 
 int main() {
@@ -91,6 +184,7 @@ int main() {
     char operation;
     int choice;
     Memory memory;
+    TrigCalculator trigCalc;
     
     cout << "=== C++ Calculator with Memory ===" << endl;
     
@@ -167,6 +261,87 @@ int main() {
                 break;
             }
             case 2: {
+                int trigChoice;
+                double angle, value, trigResult;
+                
+                do {
+                    showTrigMenu();
+                    trigCalc.displayAngleMode();
+                    while (!(cin >> trigChoice)) {
+                        cout << "Invalid input! Please enter a number: ";
+                        clearInput();
+                    }
+                    
+                    switch (trigChoice) {
+                        case 1:
+                            cout << "Enter angle: ";
+                            while (!(cin >> angle)) {
+                                cout << "Invalid input! Please enter a number: ";
+                                clearInput();
+                            }
+                            trigResult = trigCalc.sine(angle);
+                            cout << "sin(" << angle << ") = " << trigResult << endl;
+                            break;
+                        case 2:
+                            cout << "Enter angle: ";
+                            while (!(cin >> angle)) {
+                                cout << "Invalid input! Please enter a number: ";
+                                clearInput();
+                            }
+                            trigResult = trigCalc.cosine(angle);
+                            cout << "cos(" << angle << ") = " << trigResult << endl;
+                            break;
+                        case 3:
+                            cout << "Enter angle: ";
+                            while (!(cin >> angle)) {
+                                cout << "Invalid input! Please enter a number: ";
+                                clearInput();
+                            }
+                            trigResult = trigCalc.tangent(angle);
+                            cout << "tan(" << angle << ") = " << trigResult << endl;
+                            break;
+                        case 4:
+                            cout << "Enter value (-1 to 1): ";
+                            while (!(cin >> value)) {
+                                cout << "Invalid input! Please enter a number: ";
+                                clearInput();
+                            }
+                            trigResult = trigCalc.arcsine(value);
+                            if (value >= -1 && value <= 1) {
+                                cout << "asin(" << value << ") = " << trigResult << endl;
+                            }
+                            break;
+                        case 5:
+                            cout << "Enter value (-1 to 1): ";
+                            while (!(cin >> value)) {
+                                cout << "Invalid input! Please enter a number: ";
+                                clearInput();
+                            }
+                            trigResult = trigCalc.arccosine(value);
+                            if (value >= -1 && value <= 1) {
+                                cout << "acos(" << value << ") = " << trigResult << endl;
+                            }
+                            break;
+                        case 6:
+                            cout << "Enter value: ";
+                            while (!(cin >> value)) {
+                                cout << "Invalid input! Please enter a number: ";
+                                clearInput();
+                            }
+                            trigResult = trigCalc.arctangent(value);
+                            cout << "atan(" << value << ") = " << trigResult << endl;
+                            break;
+                        case 7:
+                            cout << "Returning to main menu..." << endl;
+                            break;
+                        default:
+                            cout << "Invalid choice! Please select 1-7." << endl;
+                            break;
+                    }
+                } while (trigChoice != 7);
+                break;
+            }
+            case 3: {
                 cout << "Enter value to store in memory: ";
                 double value;
                 while (!(cin >> value)) {
@@ -176,24 +351,27 @@ int main() {
                 memory.store(value);
                 break;
             }
-            case 3:
+            case 4:
                 memory.recall();
                 break;
-            case 4:
+            case 5:
                 memory.clear();
                 break;
-            case 5:
+            case 6:
                 memory.displayStatus();
                 break;
-            case 6:
+            case 7:
+                trigCalc.setAngleMode(!trigCalc.getAngleMode());
+                break;
+            case 8:
                 cout << "Thank you for using the calculator!" << endl;
                 break;
             default:
-                cout << "Invalid choice! Please select 1-6." << endl;
+                cout << "Invalid choice! Please select 1-8." << endl;
                 break;
         }
         
-    } while (choice != 6);
+    } while (choice != 8);
     
     return 0;
 }

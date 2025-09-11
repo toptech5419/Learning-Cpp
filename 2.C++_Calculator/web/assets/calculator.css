@@ -1,0 +1,616 @@
+/* PRODUCTION-READY CALCULATOR CSS - MOBILE FIRST APPROACH */
+
+/* CSS Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1.4;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d30 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* MOBILE FIRST - BASE STYLES (320px+) */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 2.5rem;
+    height: 2.5rem;
+    border: 3px solid #3e3e42;
+    border-top: 3px solid #3daee9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Header - Mobile First */
+.header {
+    text-align: center;
+    padding: 1rem 0.5rem;
+    background: rgba(45, 45, 48, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    color: #3daee9;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.version-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: #999;
+}
+
+/* Main Container - Mobile First */
+.calculator-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1rem;
+    min-height: calc(100vh - 120px);
+}
+
+.calculator {
+    background: rgba(45, 45, 48, 0.95);
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Display Section - Mobile First */
+.display-section {
+    margin-bottom: 1rem;
+}
+
+.display {
+    background: #1a1a1a;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, monospace;
+    border: 2px solid #3daee9;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    text-align: right;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    background: linear-gradient(145deg, #1a1a1a, #0f0f0f);
+}
+
+.status-bar {
+    color: #888;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    text-align: center;
+    background: rgba(30, 30, 30, 0.6);
+    border-radius: 0.25rem;
+    margin-top: 0.5rem;
+}
+
+/* Memory and Trig Sections - Mobile First */
+.memory-section, .trig-section {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: rgba(30, 30, 30, 0.4);
+    border-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.section-title {
+    font-size: 0.75rem;
+    color: #3daee9;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memory-buttons, .trig-buttons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Calculator Grid - Mobile First */
+.calculator-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+/* Button Styles - Mobile First */
+.btn {
+    background: linear-gradient(145deg, #2d2d30, #1f1f22);
+    color: white;
+    border: 1px solid #3e3e42;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    min-height: 48px;
+    cursor: pointer;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-user-select: none;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-color: #4e4e52;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Button Variants - Mobile First */
+.btn-number {
+    background: linear-gradient(145deg, #2d2d30, #1f1f22);
+    font-size: 1.1rem;
+}
+
+.btn-number:hover {
+    background: linear-gradient(145deg, #404040, #2d2d30);
+}
+
+.btn-operation {
+    background: linear-gradient(145deg, #ff8c00, #e67e00);
+    border-color: #ffa500;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.btn-operation:hover {
+    background: linear-gradient(145deg, #ffa500, #ff8c00);
+}
+
+.btn-equals {
+    background: linear-gradient(145deg, #ff8c00, #e67e00);
+    border-color: #ffa500;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.btn-equals:hover {
+    background: linear-gradient(145deg, #ffa500, #ff8c00);
+}
+
+.btn-zero {
+    grid-column: span 2;
+}
+
+.btn-clear {
+    background: linear-gradient(145deg, #dc3545, #c82333);
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-clear:hover {
+    background: linear-gradient(145deg, #e74c3c, #dc3545);
+}
+
+.btn-memory {
+    background: linear-gradient(145deg, #28a745, #218838);
+    border-color: #28a745;
+    font-size: 0.75rem;
+    min-height: 36px;
+    flex: 1;
+    color: white;
+}
+
+.btn-memory:hover {
+    background: linear-gradient(145deg, #34ce57, #28a745);
+}
+
+.btn-trig {
+    background: linear-gradient(145deg, #9c27b0, #7b1fa2);
+    border-color: #9c27b0;
+    font-size: 0.7rem;
+    min-height: 36px;
+    flex: 1;
+    color: white;
+}
+
+.btn-trig:hover {
+    background: linear-gradient(145deg, #ba68c8, #9c27b0);
+}
+
+.btn-mode {
+    background: linear-gradient(145deg, #2196f3, #1976d2);
+    border-color: #2196f3;
+    font-size: 0.7rem;
+    min-height: 32px;
+    padding: 0.25rem 0.5rem;
+    color: white;
+}
+
+.btn-mode:hover {
+    background: linear-gradient(145deg, #64b5f6, #2196f3);
+}
+
+/* Footer - Mobile First */
+.footer {
+    background: rgba(45, 45, 48, 0.9);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+.info-section {
+    max-width: 320px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.info-section h3 {
+    color: #3daee9;
+    margin-bottom: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.platform-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+}
+
+.platform {
+    padding: 0.5rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.platform.completed {
+    background: #28a745;
+    color: white;
+}
+
+.platform.current {
+    background: #ff8c00;
+    color: white;
+    animation: pulse 2s infinite;
+}
+
+.platform.planned {
+    background: #6c757d;
+    color: #e9ecef;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+.tech-details ul {
+    list-style: none;
+    padding: 0;
+}
+
+.tech-details li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ccc;
+    font-size: 0.85rem;
+}
+
+.tech-details li:last-child {
+    border-bottom: none;
+}
+
+.tech-details strong {
+    color: #3daee9;
+}
+
+/* Error Display */
+.error-display {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 1rem;
+}
+
+.error-content {
+    background: #2d2d30;
+    padding: 2rem;
+    border-radius: 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    border: 2px solid #dc3545;
+}
+
+.error-content h2 {
+    color: #dc3545;
+    margin-bottom: 1rem;
+    font-size: 1.25rem;
+}
+
+.btn-retry {
+    background: linear-gradient(145deg, #007bff, #0056b3);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+}
+
+/* RESPONSIVE BREAKPOINTS - PROGRESSIVE ENHANCEMENT */
+
+/* Small tablets and large phones (480px+) */
+@media (min-width: 480px) {
+    .calculator {
+        max-width: 380px;
+        padding: 1.25rem;
+    }
+    
+    .display {
+        font-size: 1.75rem;
+        min-height: 70px;
+    }
+    
+    .btn {
+        min-height: 52px;
+        font-size: 1.1rem;
+    }
+    
+    .header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .version-info {
+        flex-direction: row;
+        gap: 1rem;
+        font-size: 0.85rem;
+    }
+    
+    .info-section {
+        max-width: 480px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Tablets (768px+) */
+@media (min-width: 768px) {
+    .calculator {
+        max-width: 450px;
+        padding: 1.5rem;
+    }
+    
+    .display {
+        font-size: 2rem;
+        min-height: 80px;
+        padding: 1.25rem;
+    }
+    
+    .btn {
+        min-height: 58px;
+        font-size: 1.2rem;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .header {
+        padding: 1.5rem 1rem;
+    }
+    
+    .calculator-container {
+        padding: 1.5rem;
+    }
+    
+    .info-section {
+        max-width: 768px;
+        gap: 2rem;
+    }
+}
+
+/* Small laptops (1024px+) */
+@media (min-width: 1024px) {
+    .calculator {
+        max-width: 500px;
+        padding: 2rem;
+    }
+    
+    .display {
+        font-size: 2.25rem;
+        min-height: 90px;
+        padding: 1.5rem;
+    }
+    
+    .btn {
+        min-height: 64px;
+        font-size: 1.3rem;
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .calculator-container {
+        padding: 2rem;
+    }
+    
+    .info-section {
+        max-width: 1024px;
+        gap: 3rem;
+    }
+}
+
+/* Large screens (1200px+) */
+@media (min-width: 1200px) {
+    body {
+        font-size: 18px;
+    }
+    
+    .calculator {
+        max-width: 550px;
+        padding: 2.5rem;
+    }
+    
+    .display {
+        font-size: 2.5rem;
+        min-height: 100px;
+        padding: 2rem;
+    }
+    
+    .btn {
+        min-height: 70px;
+        font-size: 1.4rem;
+    }
+    
+    .header h1 {
+        font-size: 3rem;
+    }
+    
+    .info-section {
+        max-width: 1200px;
+        gap: 4rem;
+    }
+}
+
+/* Ultra-wide screens (1440px+) */
+@media (min-width: 1440px) {
+    .calculator {
+        max-width: 600px;
+    }
+    
+    .info-section {
+        max-width: 1400px;
+    }
+}
+
+/* Print styles */
+@media print {
+    .footer, .header {
+        display: none;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+    
+    .calculator {
+        box-shadow: none;
+        border: 2px solid #000;
+        background: white;
+    }
+    
+    .display {
+        background: white;
+        border-color: #000;
+        color: black;
+    }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 2dppx) {
+    .btn {
+        border-width: 0.5px;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .loading-spinner {
+        animation: none;
+    }
+    
+    .platform.current {
+        animation: none;
+    }
+}
+
+/* Focus styles for accessibility */
+.btn:focus {
+    outline: 2px solid #3daee9;
+    outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    /* Already dark by default */
+}

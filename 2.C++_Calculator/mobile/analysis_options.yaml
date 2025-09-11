@@ -1,0 +1,51 @@
+# Analysis options for Flutter C++ Calculator Mobile
+
+include: package:flutter_lints/flutter.yaml
+
+# Additional lint rules
+linter:
+  rules:
+    # Style rules
+    - prefer_single_quotes
+    - prefer_final_fields
+    - prefer_final_locals
+    - prefer_const_constructors
+    - prefer_const_literals_to_create_immutables
+    
+    # Code quality rules
+    - avoid_empty_else
+    - avoid_redundant_argument_values
+    - avoid_returning_null_for_future
+    - avoid_slow_async_io
+    - avoid_types_as_parameter_names
+    
+    # Documentation rules
+    - public_member_api_docs
+    
+    # Performance rules
+    - prefer_collection_literals
+    - prefer_spread_collections
+    
+    # Safety rules
+    - always_use_package_imports
+    - avoid_print
+    - avoid_web_libraries_in_flutter
+
+# Analyzer configuration
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+    - "**/*.freezed.dart"
+    - "build/**"
+    - "ios/**"
+    - "android/**"
+    
+  errors:
+    # Treat missing returns as warnings instead of errors
+    missing_return: warning
+    
+    # Allow TODO comments
+    todo: info
+    
+    # FFI-related analysis adjustments
+    undefined_function: warning
